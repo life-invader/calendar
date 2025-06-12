@@ -1,4 +1,13 @@
+export interface IUser {
+  username: string;
+  password: string;
+}
+
 export interface IAuthSlice {
   isAuth: boolean;
-  setAuth: (authState: boolean) => void;
+  user: IUser | null;
+  isLoading: boolean;
+  error: string;
+  login: (credentials: { username: string, password: string }) => Promise<void>;
+  logout: () => void;
 }

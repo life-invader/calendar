@@ -3,6 +3,7 @@
     "id": 1,
     "name": "Leanne Graham",
     "username": "Bret",
+    "password": "password",
     "email": "Sincere@april.biz",
     "address": {
       "street": "Kulas Light",
@@ -26,6 +27,7 @@
     "id": 2,
     "name": "Ervin Howell",
     "username": "Antonette",
+    "password": "password",
     "email": "Shanna@melissa.tv",
     "address": {
       "street": "Victor Plains",
@@ -49,6 +51,7 @@
     "id": 3,
     "name": "Clementine Bauch",
     "username": "Samantha",
+    "password": "password",
     "email": "Nathan@yesenia.net",
     "address": {
       "street": "Douglas Extension",
@@ -72,6 +75,7 @@
     "id": 4,
     "name": "Patricia Lebsack",
     "username": "Karianne",
+    "password": "password",
     "email": "Julianne.OConner@kory.org",
     "address": {
       "street": "Hoeger Mall",
@@ -95,6 +99,7 @@
     "id": 5,
     "name": "Chelsey Dietrich",
     "username": "Kamren",
+    "password": "password",
     "email": "Lucio_Hettinger@annie.ca",
     "address": {
       "street": "Skiles Walks",
@@ -118,6 +123,7 @@
     "id": 6,
     "name": "Mrs. Dennis Schulist",
     "username": "Leopoldo_Corkery",
+    "password": "password",
     "email": "Karley_Dach@jasper.info",
     "address": {
       "street": "Norberto Crossing",
@@ -141,6 +147,7 @@
     "id": 7,
     "name": "Kurtis Weissnat",
     "username": "Elwyn.Skiles",
+    "password": "password",
     "email": "Telly.Hoeger@billy.biz",
     "address": {
       "street": "Rex Trail",
@@ -164,6 +171,7 @@
     "id": 8,
     "name": "Nicholas Runolfsdottir V",
     "username": "Maxime_Nienow",
+    "password": "password",
     "email": "Sherwood@rosamond.me",
     "address": {
       "street": "Ellsworth Summit",
@@ -187,6 +195,7 @@
     "id": 9,
     "name": "Glenna Reichert",
     "username": "Delphine",
+    "password": "password",
     "email": "Chaim_McDermott@dana.io",
     "address": {
       "street": "Dayna Park",
@@ -210,6 +219,7 @@
     "id": 10,
     "name": "Clementina DuBuque",
     "username": "Moriah.Stanton",
+    "password": "password",
     "email": "Rey.Padberg@karina.biz",
     "address": {
       "street": "Kattie Turnpike",
