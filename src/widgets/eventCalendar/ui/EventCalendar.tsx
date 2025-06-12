@@ -2,20 +2,17 @@ import { Calendar, Button, Modal } from 'antd';
 import { useEffect, useState } from 'react';
 import { EventForm } from '@entities/forms';
 import { useStore } from '@store/index';
-// import type { IEvent } from '@shared/lib/types';
+import { fetchGuestsAction } from '@store/actions';
+import { selectGuests } from '@store/selectors';
 import '../style.pcss';
-
-// interface IEventCalendarProps {
-//   events?: IEvent[];
-// }
 
 export const EventCalendar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const fetchGuests = useStore((state) => state.fetchGuests);
-  const guests = useStore((state) => state.guests);
+  const fetchGuests = useStore(fetchGuestsAction);
+  const guests = useStore(selectGuests);
 
-  const toggleModal = () => {
-    setIsModalOpen(!isModalOpen);
+  const openModal = () => {
+    setIsModalOpen(true);
   };
 
   const closeModal = () => {
@@ -27,20 +24,22 @@ export const EventCalendar = () => {
   }, []);
 
   return (
-    <div className="eventCalendar">
+    <div className={'eventCalendar'}>
       <Calendar />
+
       <Modal
-        title="Создать собыйтие"
+        title={'Создать собыйтие'}
         open={isModalOpen}
         onCancel={closeModal}
         footer={[
-          <Button key="back" onClick={closeModal}>
+          <Button key={'back'} onClick={closeModal}>
             Отмена
           </Button>,
         ]}>
         <EventForm guests={guests} />
       </Modal>
-      <Button onClick={toggleModal}>Добавить событие</Button>
+
+      <Button onClick={openModal}>Добавить событие</Button>
     </div>
   );
 };

@@ -8,10 +8,14 @@ export const createAuthSlice: StateCreator<
   [],
   IAuthSlice
 > = (set) => ({
+  // state
   isInitialAuthCheckingComplete: false,
   isAuthenticated: false,
-  user: null,
   isLoading: false,
+  user: null,
+  errorMsg: null,
+
+  // actions
   login: async ({ username, password }) => {
     try {
       set({ isLoading: true })
@@ -25,11 +29,11 @@ export const createAuthSlice: StateCreator<
           set({ isLoading: false, isAuthenticated: true, user: mockUserFromJson });
           localStorage.setItem("username", username);
         } else {
-          set({ isLoading: false });
+          set({ isLoading: false, errorMsg: "Пользователь не найден" });
         }
       }, 1000)
     } catch {
-      set({ isLoading: false });
+      set({ isLoading: false, errorMsg: "Ошибка сервера" });
     }
   },
   logout: () => {
@@ -37,16 +41,16 @@ export const createAuthSlice: StateCreator<
     set({ isAuthenticated: false, user: null });
   },
   checkAuth: () => {
+    const username = localStorage.getItem("username");
+
+    if (!username) {
+      set({ isInitialAuthCheckingComplete: true });
+      console.debug("[AuthSlice]: Не авторизован")
+
+      return;
+    }
+
     setTimeout(async () => {
-      const username = localStorage.getItem("username");
-
-      if (!username) {
-        set({ isInitialAuthCheckingComplete: true });
-        console.debug("[AuthSlice]: Не авторизован")
-
-        return;
-      }
-
       const response = await fetch("./public/json/users.json");
       const users: IUser[] = await response.json();
       const mockUserFromJson = users.find((user) => user.username === username);
@@ -60,5 +64,5 @@ export const createAuthSlice: StateCreator<
         console.debug("[AuthSlice]: Пользователь не найлен")
       }
     }, 1000)
-  },
+  }
 })

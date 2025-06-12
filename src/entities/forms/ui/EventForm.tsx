@@ -1,5 +1,4 @@
 import { Button, Form, Input, Select, type FormProps } from 'antd';
-import { useStore } from '@store/index';
 import { formValidationRules } from '../cfg';
 import type { IUser } from '@store/authSlice/types';
 import '../style.pcss';
@@ -14,15 +13,8 @@ interface IFieldType {
 }
 
 export const EventForm = ({ guests }: IEventFormProps) => {
-  const login = useStore((state) => state.login);
-  const isLoading = useStore((state) => state.isLoading);
-
   const onFinish: FormProps<IFieldType>['onFinish'] = (values) => {
-    login(values as Required<IFieldType>);
-  };
-
-  const onFinishFailed: FormProps<IFieldType>['onFinishFailed'] = (errorInfo) => {
-    console.log('Failed:', errorInfo);
+    console.log(values);
   };
 
   return (
@@ -31,8 +23,7 @@ export const EventForm = ({ guests }: IEventFormProps) => {
       name="login"
       layout="vertical"
       scrollToFirstError={true}
-      onFinish={onFinish}
-      onFinishFailed={onFinishFailed}>
+      onFinish={onFinish}>
       <Form.Item label="Описание события" name="description" rules={[formValidationRules.required]}>
         <Input placeholder="Описание события" />
       </Form.Item>
@@ -45,7 +36,7 @@ export const EventForm = ({ guests }: IEventFormProps) => {
       </Form.Item>
 
       <Form.Item>
-        <Button block type="primary" htmlType="submit" loading={isLoading}>
+        <Button block type="primary" htmlType="submit">
           Создать
         </Button>
       </Form.Item>

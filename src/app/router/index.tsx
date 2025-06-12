@@ -8,12 +8,12 @@ export const Router = () => {
     <BrowserRouter>
       <Routes>
         <Route element={<PrivateRoute />}>
-          <Route path="/" element={<Main />} />
+          <Route path={'/'} element={<Main />} />
           {/* Остальные приватные роуты */}
         </Route>
 
-        <Route path="/login" element={<Login />} />
-        <Route path="*" element={<Navigate to={'/'} />} />
+        <Route path={'/login'} element={<Login />} />
+        <Route path={'*'} element={<Navigate to={'/'} />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,6 +1,8 @@
 import { Button, Form, Input, type FormProps } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { useStore } from '@store/index';
+import { loginAction } from '@store/actions';
+import { selectAuthErrorMsg, selectIsLoading } from '@store/selectors';
 import { formValidationRules } from '../cfg';
 import '../style.pcss';
 
@@ -10,25 +12,21 @@ interface IFieldType {
 }
 
 export const LoginForm = () => {
-  const login = useStore((state) => state.login);
-  const isLoading = useStore((state) => state.isLoading);
+  const login = useStore(loginAction);
+  const isLoading = useStore(selectIsLoading);
+  const loginErrorMsg = useStore(selectAuthErrorMsg);
 
   const onFinish: FormProps<IFieldType>['onFinish'] = (values) => {
     login(values as Required<IFieldType>);
   };
 
-  const onFinishFailed: FormProps<IFieldType>['onFinishFailed'] = (errorInfo) => {
-    console.log('Failed:', errorInfo);
-  };
-
   return (
     <Form
-      className="loginForm"
-      name="login"
+      className="form form--loginForm"
+      name="loginForm"
       layout="vertical"
       scrollToFirstError={true}
-      onFinish={onFinish}
-      onFinishFailed={onFinishFailed}>
+      onFinish={onFinish}>
       <Form.Item name="username" rules={[formValidationRules.required]}>
         <Input prefix={<UserOutlined />} placeholder="Логин" />
       </Form.Item>
@@ -42,6 +40,8 @@ export const LoginForm = () => {
           Log in
         </Button>
       </Form.Item>
+
+      {loginErrorMsg && <p className="form__submitResultMsg">{loginErrorMsg}</p>}
     </Form>
   );
 };
