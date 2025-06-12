@@ -1,8 +1,8 @@
 import { Navigate, Outlet } from 'react-router';
 import { useStore } from '@store/index';
+import { selectIsAuth } from '@store/selectors';
 
 export const PrivateRoute = () => {
-  const isAuth = useStore((state) => state.isAuth);
-
-  return isAuth ? <Outlet /> : <Navigate to={'/login'} replace={true} />;
+  const isAuthenticated = useStore(selectIsAuth);
+  return isAuthenticated ? <Outlet /> : <Navigate to={'/login'} replace={true} />;
 };

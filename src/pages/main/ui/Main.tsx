@@ -1,3 +1,9 @@
+import { EventCalendar } from '@widgets/eventCalendar';
+
 export const Main = () => {
-  return <div>Main</div>;
+  return (
+    <div className="mainPage">
+      <EventCalendar />
+    </div>
+  );
 };

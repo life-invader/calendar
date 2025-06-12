@@ -1,12 +1,13 @@
 import { LoginForm } from '@entities/forms';
 import { Navigate } from 'react-router';
 import { useStore } from '@store/index';
+import { selectIsAuth } from '@store/selectors';
 import '../style.pcss';
 
 export const Login = () => {
-  const isAuth = useStore((state) => state.isAuth);
+  const isAuthenticated = useStore(selectIsAuth);
 
-  if (isAuth) {
+  if (isAuthenticated) {
     return <Navigate to={'/'} replace={true} />;
   }
 

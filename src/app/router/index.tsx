@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router';
 import { PrivateRoute } from '@shared/lib/privateRoute/PrivateRoute';
 import { Main } from '@pages/main/ui/Main';
 import { Login } from '@pages/login/ui/Login';
@@ -13,7 +13,7 @@ export const Router = () => {
         </Route>
 
         <Route path="/login" element={<Login />} />
-        <Route path="*" element={<div>404</div>} />
+        <Route path="*" element={<Navigate to={'/'} />} />
       </Routes>
     </BrowserRouter>
   );
