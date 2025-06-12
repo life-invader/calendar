@@ -1,23 +1,17 @@
 import { Button, Form, Input, type FormProps } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { useStore } from '@store/index';
-import { loginAction } from '@store/actions';
-import { selectAuthErrorMsg, selectIsLoading } from '@store/selectors';
 import { formValidationRules } from '../cfg';
+import { useShallow } from 'zustand/shallow';
+import { authSliceSelector } from '../cfg/storeSelectors';
+import type { ILoginFormFieldType } from '../cfg/types';
 import '../style.pcss';
 
-interface IFieldType {
-  username?: string;
-  password?: string;
-}
-
 export const LoginForm = () => {
-  const login = useStore(loginAction);
-  const isLoading = useStore(selectIsLoading);
-  const loginErrorMsg = useStore(selectAuthErrorMsg);
+  const { isLoading, login, loginErrorMsg } = useStore(useShallow(authSliceSelector));
 
-  const onFinish: FormProps<IFieldType>['onFinish'] = (values) => {
-    login(values as Required<IFieldType>);
+  const onFinish: FormProps<ILoginFormFieldType>['onFinish'] = (values) => {
+    login(values);
   };
 
   return (
