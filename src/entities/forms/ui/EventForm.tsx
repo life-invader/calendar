@@ -1,12 +1,11 @@
+import dayjs from 'dayjs';
 import { Button, Form, Input, Select, DatePicker, type FormProps } from 'antd';
 import { formValidationRules } from '../cfg';
 import { useLayoutEffect, useState } from 'react';
-import dayjs from 'dayjs';
-import type { IEvent } from '@shared/lib/types';
-import type { IUser } from '@store/authSlice/types';
-import '../style.pcss';
 import { useStore } from '@store/index';
 import { createEventAction } from '@store/actions';
+import type { IEvent, IUser } from '@shared/lib/types';
+import '../style.pcss';
 
 interface IEventFormProps {
   guests: IUser[];

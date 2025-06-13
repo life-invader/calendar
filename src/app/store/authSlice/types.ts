@@ -1,14 +1,4 @@
-export interface IUser {
-  accessToken: string;
-  refreshToken: string;
-  email: string;
-  id: number;
-  username: string;
-  firstName: string;
-  lastName: string;
-  password: string;
-  image: string;
-}
+import type { IUser } from "@shared/lib/types";
 
 export interface IAuthSlice {
   // state

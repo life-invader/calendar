@@ -1,5 +1,4 @@
-import type { IEvent } from "@shared/lib/types";
-import type { IUser } from "@store/authSlice/types";
+import type { IEvent, IUser } from "@shared/lib/types";
 
 export interface IEventSlice {
   guests: IUser[];
