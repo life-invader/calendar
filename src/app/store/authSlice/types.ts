@@ -1,8 +1,13 @@
 export interface IUser {
+  accessToken: string;
+  refreshToken: string;
+  email: string;
   id: number;
-  name: string;
   username: string;
+  firstName: string;
+  lastName: string;
   password: string;
+  image: string;
 }
 
 export interface IAuthSlice {

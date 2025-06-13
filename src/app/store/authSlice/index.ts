@@ -16,53 +16,55 @@ export const createAuthSlice: StateCreator<
   errorMsg: null,
 
   // actions
-  login: async ({ username, password }) => {
+  login: async (credentials) => {
     try {
       set({ isLoading: true })
 
-      setTimeout(async () => {
-        const response = await fetch("./public/json/users.json");
-        const users: IUser[] = await response.json();
-        const mockUserFromJson = users.find((user) => user.username === username && user.password === password);
+      const response = await fetch('https://dummyjson.com/auth/login', {
+        method: "POST",
+        credentials: "same-origin",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(credentials),
+      });
+      const user: IUser = await response.json();
+      localStorage.setItem("accessToken", user.accessToken);
+      localStorage.setItem("refreshToken", user.refreshToken);
 
-        if (mockUserFromJson) {
-          set({ isLoading: false, isAuthenticated: true, user: mockUserFromJson })
-          localStorage.setItem("username", username);
-        } else {
-          set({ isLoading: false, errorMsg: "Пользователь не найден" })
-        }
-      }, 1000)
+      set({ isLoading: false, isAuthenticated: true, user, })
     } catch {
       set({ isLoading: false, errorMsg: "Ошибка сервера" })
     }
   },
   logout: () => {
-    localStorage.removeItem("username");
+    localStorage.removeItem("accessToken");
     set({ isAuthenticated: false, user: null })
   },
-  checkAuth: () => {
-    const username = localStorage.getItem("username");
+  checkAuth: async () => {
+    try {
+      const accessToken = localStorage.getItem("accessToken");
 
-    if (!username) {
-      set({ isInitialAuthCheckingComplete: true })
-      console.debug("[AuthSlice]: Не авторизован")
-
-      return;
-    }
-
-    setTimeout(async () => {
-      const response = await fetch("./public/json/users.json");
-      const users: IUser[] = await response.json();
-      const mockUserFromJson = users.find((user) => user.username === username);
-
-      if (mockUserFromJson) {
-        set({ isInitialAuthCheckingComplete: true, isAuthenticated: true, user: mockUserFromJson })
-        localStorage.setItem("username", username);
-        console.debug("[AuthSlice]: Авторизован")
-      } else {
-        set({ isAuthenticated: false })
-        console.debug("[AuthSlice]: Пользователь не найлен")
+      if (!accessToken) {
+        set({ isInitialAuthCheckingComplete: true, isAuthenticated: false, })
+        return
       }
-    }, 1000)
+
+      const response = await fetch('https://dummyjson.com/auth/me', {
+        headers: {
+          'Authorization': `Bearer ${accessToken}`,
+        },
+      });
+
+      console.log(response)
+
+      if (!response.ok) {
+        set({ isInitialAuthCheckingComplete: true, isAuthenticated: false, })
+        return;
+      }
+
+      const user: IUser = await response.json();
+      set({ isInitialAuthCheckingComplete: true, isAuthenticated: true, user: user })
+    } catch {
+      set({ isInitialAuthCheckingComplete: true, isAuthenticated: false, })
+    }
   },
 })

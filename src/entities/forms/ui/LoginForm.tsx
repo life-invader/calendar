@@ -20,7 +20,8 @@ export const LoginForm = () => {
       name="loginForm"
       layout="vertical"
       scrollToFirstError={true}
-      onFinish={onFinish}>
+      onFinish={onFinish}
+      initialValues={{ username: 'emilys', password: 'emilyspass' }}>
       <Form.Item name="username" rules={[formValidationRules.required]}>
         <Input prefix={<UserOutlined />} placeholder="Логин" />
       </Form.Item>
