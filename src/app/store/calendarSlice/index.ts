@@ -15,8 +15,6 @@ export const createCalendarSlice: StateCreator<
 > = (set, get) => ({
   guests: [],
   events: [],
-  setGuests: () => { set({}) },
-  setEvents: () => { set({}) },
   fetchGuests: async () => {
     try {
       const response = await fetch('https://dummyjson.com/users');
@@ -26,11 +24,14 @@ export const createCalendarSlice: StateCreator<
       console.error("[EventSlice]: Ошибка получения гостей")
     }
   },
+  fetchEvents: () => {
+    const events = JSON.parse(localStorage.getItem('events') || '[]') as IEvent[];
+    set({ events });
+  },
   createEvent: (event) => {
-    console.log(event)
-
     const newEvent: IEvent = {
       ...event,
+      date: event.date.format('YYYY-MM-DD'),
       author: get().user?.username,
     }
 
