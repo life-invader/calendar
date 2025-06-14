@@ -23,6 +23,7 @@ export const EventCalendar = () => {
   const guests = useStore(selectGuests);
   const events = useStore(selectEvents);
 
+  // handlers
   const openModal = () => {
     setIsModalOpen(true);
   };
