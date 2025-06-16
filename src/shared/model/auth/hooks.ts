@@ -1,14 +1,14 @@
 import { useEffect } from 'react';
-import { useShallow } from 'zustand/shallow';
 import { useAuthSlice } from './authSlice';
+import { selectCheckAuthAction, selectIsInitialAuthCheckingComplete } from './selectors';
 
 export const useAuth = () => {
-  const state = useAuthSlice(useShallow((state) => state));
-  const { checkAuth } = state;
+  const isInitialAuthCheckingComplete = useAuthSlice(selectIsInitialAuthCheckingComplete);
+  const checkAuth = useAuthSlice(selectCheckAuthAction);
 
   useEffect(() => {
     checkAuth();
   }, [checkAuth]);
 
-  return state;
+  return { isInitialAuthCheckingComplete, checkAuth };
 };

@@ -1,9 +1,10 @@
 import { Button } from 'antd';
-import { useAuth } from '@shared/model/auth/hooks';
+import { useAuthSlice } from '@shared/model/auth/authSlice';
+import { selectLogoutAction } from '@shared/model/auth/selectors';
 import type { ILogoutBtnProps } from '../cfg/types';
 
 export const LogoutBtn = ({ label }: ILogoutBtnProps) => {
-  const { logout } = useAuth();
+  const logout = useAuthSlice(selectLogoutAction);
 
   return <Button onClick={logout}>{label}</Button>;
 };

@@ -1,11 +1,14 @@
 import { Button, Form, Input, type FormProps } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { formValidationRules } from '@shared/lib';
-import { useAuth } from '@shared/model/auth/hooks';
+import { useAuthSlice } from '@shared/model/auth/authSlice';
+import { selectErrorMsg, selectIsLoading, selectLoginAction } from '@shared/model/auth/selectors';
 import type { ILoginFormFieldType } from '../cfg/types';
 
 export const LoginForm = () => {
-  const { isLoading, login, errorMsg } = useAuth();
+  const isLoading = useAuthSlice(selectIsLoading);
+  const errorMsg = useAuthSlice(selectErrorMsg);
+  const login = useAuthSlice(selectLoginAction);
 
   const onFinish: FormProps<ILoginFormFieldType>['onFinish'] = (values) => {
     login(values);

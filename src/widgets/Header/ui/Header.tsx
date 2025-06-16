@@ -1,9 +1,10 @@
 import { LogoutBtn } from '@features/logoutBtn';
-import { useAuth } from '@shared/model/auth/hooks';
+import { useAuthSlice } from '@shared/model/auth/authSlice';
+import { selectIsAuthenticated } from '@shared/model/auth/selectors';
 import '../style.pcss';
 
 export const Header = () => {
-  const { isAuthenticated } = useAuth();
+  const isAuthenticated = useAuthSlice(selectIsAuthenticated);
 
   return (
     <header className="header">
