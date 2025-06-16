@@ -1,12 +1,11 @@
 import { LoginForm } from '@entities/forms';
 import { Navigate } from 'react-router';
-import { useStore } from '@store/index';
-import { selectIsAuth } from '@store/selectors';
 import { AppRoutePath } from '@shared/lib';
+import { useAuth } from '@shared/model/auth/hooks';
 import '../style.pcss';
 
 export const Login = () => {
-  const isAuthenticated = useStore(selectIsAuth);
+  const { isAuthenticated } = useAuth();
 
   if (isAuthenticated) {
     return <Navigate to={AppRoutePath.home} replace={true} />;

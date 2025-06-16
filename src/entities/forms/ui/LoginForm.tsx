@@ -1,13 +1,11 @@
 import { Button, Form, Input, type FormProps } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { useStore } from '@store/index';
-import { useShallow } from 'zustand/shallow';
 import { formValidationRules } from '@shared/lib';
-import { authSliceSelector } from '../cfg/storeSelectors';
+import { useAuth } from '@shared/model/auth/hooks';
 import type { ILoginFormFieldType } from '../cfg/types';
 
 export const LoginForm = () => {
-  const { isLoading, login, loginErrorMsg } = useStore(useShallow(authSliceSelector));
+  const { isLoading, login, errorMsg } = useAuth();
 
   const onFinish: FormProps<ILoginFormFieldType>['onFinish'] = (values) => {
     login(values);
@@ -35,7 +33,7 @@ export const LoginForm = () => {
         </Button>
       </Form.Item>
 
-      {loginErrorMsg && <p className="form__submitResultMsg">{loginErrorMsg}</p>}
+      {errorMsg && <p className="form__submitResultMsg">{errorMsg}</p>}
     </Form>
   );
 };

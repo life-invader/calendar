@@ -1,8 +1,7 @@
+import { useAuth } from '@shared/model/auth/hooks';
 import { Navigate, Outlet } from 'react-router';
-import { useStore } from '@store/index';
-import { selectIsAuth } from '@store/selectors';
 
 export const PrivateRoute = () => {
-  const isAuthenticated = useStore(selectIsAuth);
+  const { isAuthenticated } = useAuth();
   return isAuthenticated ? <Outlet /> : <Navigate to={'/login'} replace={true} />;
 };

@@ -1,21 +1,14 @@
-import type { StateCreator } from 'zustand'
+import { create } from 'zustand'
+import type { IUser } from '@shared/lib/types';
 import type { IAuthSlice } from './types'
-import type { IUser } from '@shared/lib/types'
 
-export const createAuthSlice: StateCreator<
-  IAuthSlice,
-  [['zustand/devtools', never], ['zustand/immer', never]],
-  [],
-  IAuthSlice
-> = (set) => ({
-  // state
+export const useAuthSlice = create<IAuthSlice>((set) => ({
   isInitialAuthCheckingComplete: false,
   isAuthenticated: false,
   isLoading: false,
   user: null,
   errorMsg: null,
 
-  // actions
   login: async (credentials) => {
     try {
       set({ isLoading: true })
@@ -54,8 +47,6 @@ export const createAuthSlice: StateCreator<
         },
       });
 
-      console.log(response)
-
       if (!response.ok) {
         set({ isInitialAuthCheckingComplete: true, isAuthenticated: false, })
         return;
@@ -67,4 +58,4 @@ export const createAuthSlice: StateCreator<
       set({ isInitialAuthCheckingComplete: true, isAuthenticated: false, })
     }
   },
-})
+}));

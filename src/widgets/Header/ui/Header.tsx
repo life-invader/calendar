@@ -1,10 +1,9 @@
-import { useStore } from '@store/index';
 import { LogoutBtn } from '@features/logoutBtn';
-import { selectIsAuth } from '@store/selectors';
+import { useAuth } from '@shared/model/auth/hooks';
 import '../style.pcss';
 
 export const Header = () => {
-  const isAuthenticated = useStore(selectIsAuth);
+  const { isAuthenticated } = useAuth();
 
   return (
     <header className="header">
