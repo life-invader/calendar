@@ -1,11 +1,22 @@
-import { Button, Form, Input, Select, DatePicker } from 'antd';
-import { formValidationRules } from '../cfg';
+import { Button, DatePicker, Form, Input, Select, type FormProps } from 'antd';
+import { eventActions } from '@entities/event';
+import { formValidationRules } from '@shared/lib';
 import { formatUsersForSelect } from '../lib';
-import type { IEventFormProps } from '../cfg/types';
-import '../style.pcss';
+import type { ICreateNewEventProps, IEventFormFieldType } from '../model/types';
 
-export const EventForm = ({ guests, date, onFinish, form }: IEventFormProps) => {
+export const CreateNewEvent = ({
+  guests,
+  date,
+  onFinish = () => {},
+  form,
+}: ICreateNewEventProps) => {
+  const { createEvent } = eventActions;
   const guestsSelectOptions = formatUsersForSelect(guests);
+
+  const formFinishHandler: FormProps<IEventFormFieldType>['onFinish'] = (values) => {
+    createEvent(values);
+    onFinish();
+  };
 
   return (
     <Form
@@ -14,7 +25,7 @@ export const EventForm = ({ guests, date, onFinish, form }: IEventFormProps) => 
       name="event"
       layout="vertical"
       scrollToFirstError={true}
-      onFinish={onFinish}
+      onFinish={formFinishHandler}
       initialValues={{ date: date }}>
       <Form.Item label="Дата события" name={'date'} rules={[formValidationRules.required]}>
         <DatePicker disabled={true} name={'date'} format={'YYYY-MM-DD'} />

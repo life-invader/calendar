@@ -1,10 +1,9 @@
 import type { StateCreator } from 'zustand'
 import type { IAuthSlice } from './types'
-import type { IEventSlice } from '@store/calendarSlice/types'
 import type { IUser } from '@shared/lib/types'
 
 export const createAuthSlice: StateCreator<
-  IAuthSlice & IEventSlice,
+  IAuthSlice,
   [['zustand/devtools', never], ['zustand/immer', never]],
   [],
   IAuthSlice

@@ -1,4 +1,4 @@
-import { Header } from '@widgets/Header';
+import { Header } from '@widgets/header';
 import '../style.pcss';
 
 export const PageLayout = ({ children }: { children: React.ReactNode }) => {

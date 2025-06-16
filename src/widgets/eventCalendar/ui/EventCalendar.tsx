@@ -1,27 +1,25 @@
 import dayjs from 'dayjs';
 import { Calendar, Button, Modal, Form } from 'antd';
 import { useEffect, useState } from 'react';
-import { EventForm } from '@entities/forms';
-import { useStore } from '@store/index';
-import { createEventAction, fetchEventsAction, fetchGuestsAction } from '@store/actions';
-import { selectEvents, selectGuests } from '@store/selectors';
+import { CreateNewEvent } from '@features/event';
+import { eventSelectors, eventActions, useEventSlice } from '@entities/event';
+import { useUserSlice, userSelectors, userActions } from '@entities/user';
 import { dateCellRender } from '../lib';
-import type { CalendarProps, FormProps } from 'antd';
-import type { IEventFormFieldType } from '@entities/forms/cfg/types';
+import type { CalendarProps } from 'antd';
 import '../style.pcss';
 
 export const EventCalendar = () => {
   // actions
-  const createEvent = useStore(createEventAction);
-  const fetchGuests = useStore(fetchGuestsAction);
-  const fetchEvents = useStore(fetchEventsAction);
+  const { fetchEvents } = eventActions;
+  const { fetchUsers } = userActions;
 
   // state
   const [form] = Form.useForm();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [calendarDate] = useState<dayjs.Dayjs>(dayjs);
-  const guests = useStore(selectGuests);
-  const events = useStore(selectEvents);
+
+  const guests = useUserSlice(userSelectors.selectEvents);
+  const events = useEventSlice(eventSelectors.selectEvents);
 
   // handlers
   const openModal = () => {
@@ -37,8 +35,7 @@ export const EventCalendar = () => {
     form.setFieldsValue({ date: date });
   };
 
-  const onEventFormFinish: FormProps<IEventFormFieldType>['onFinish'] = (values) => {
-    createEvent(values);
+  const onEventFormFinish = () => {
     form.resetFields();
     closeModal();
   };
@@ -48,9 +45,9 @@ export const EventCalendar = () => {
   };
 
   useEffect(() => {
-    fetchGuests();
     fetchEvents();
-  }, [fetchGuests, fetchEvents]);
+    fetchUsers();
+  }, [fetchEvents, fetchUsers]);
 
   return (
     <div className={'eventCalendar'}>
@@ -65,7 +62,12 @@ export const EventCalendar = () => {
             Отмена
           </Button>,
         ]}>
-        <EventForm form={form} guests={guests} date={calendarDate} onFinish={onEventFormFinish} />
+        <CreateNewEvent
+          form={form}
+          guests={guests}
+          date={calendarDate}
+          onFinish={onEventFormFinish}
+        />
       </Modal>
 
       <Button onClick={openModal}>Добавить событие</Button>

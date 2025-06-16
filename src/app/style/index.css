@@ -1,4 +1,5 @@
 @import './palette.pcss';
+@import './ui/form.pcss';
 
 *,
 *::after,

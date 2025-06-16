@@ -1,11 +1,10 @@
 import { Button, Form, Input, type FormProps } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { useStore } from '@store/index';
-import { formValidationRules } from '../cfg';
 import { useShallow } from 'zustand/shallow';
+import { formValidationRules } from '@shared/lib';
 import { authSliceSelector } from '../cfg/storeSelectors';
 import type { ILoginFormFieldType } from '../cfg/types';
-import '../style.pcss';
 
 export const LoginForm = () => {
   const { isLoading, login, loginErrorMsg } = useStore(useShallow(authSliceSelector));
