@@ -1,4 +1,5 @@
 import { useEventSlice } from "../model";
+import { useAuthSlice } from "@shared/index";
 import type { IEvent } from "@shared/index";
 import type { INewEvent } from "../model/types";
 
@@ -15,11 +16,12 @@ export const fetchEvents = () => {
  */
 export const createEvent = (event: INewEvent) => {
   const { setState, getState } = useEventSlice;
+  const currentUserName = useAuthSlice.getState().user?.username || "";
 
   const newEvent: IEvent = {
     ...event,
     date: event.date.format('YYYY-MM-DD'),
-    author: "123123",
+    author: currentUserName,
   };
 
   setState({ events: [...getState().events, newEvent] });

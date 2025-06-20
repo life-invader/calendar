@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import { authInstance } from '@shared/index';
 import type { IAuthSlice } from './types'
 import type { IUser } from '../types';
 
@@ -12,14 +13,8 @@ export const useAuthSlice = create<IAuthSlice>((set) => ({
   login: async (credentials) => {
     try {
       set({ isLoading: true })
+      const user: IUser = await authInstance.login(credentials);
 
-      const response = await fetch('https://dummyjson.com/auth/login', {
-        method: "POST",
-        credentials: "same-origin",
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(credentials),
-      });
-      const user: IUser = await response.json();
       localStorage.setItem("accessToken", user.accessToken);
       localStorage.setItem("refreshToken", user.refreshToken);
 
@@ -41,11 +36,7 @@ export const useAuthSlice = create<IAuthSlice>((set) => ({
         return
       }
 
-      const response = await fetch('https://dummyjson.com/auth/me', {
-        headers: {
-          'Authorization': `Bearer ${accessToken}`,
-        },
-      });
+      const response = await authInstance.check(accessToken);
 
       if (!response.ok) {
         set({ isInitialAuthCheckingComplete: true, isAuthenticated: false, })
