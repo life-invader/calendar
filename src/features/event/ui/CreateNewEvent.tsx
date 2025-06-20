@@ -1,6 +1,6 @@
 import { Button, DatePicker, Form, Input, Select, type FormProps } from 'antd';
 import { eventActions } from '@entities/event';
-import { formValidationRules } from '@shared/lib';
+import { formValidationRules } from '@shared/index';
 import { formatUsersForSelect } from '../lib';
 import type { ICreateNewEventProps, IEventFormFieldType } from '../model/types';
 

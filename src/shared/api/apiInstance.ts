@@ -1,4 +1,4 @@
-export const API_URL = import.meta.env.VITE_AUTH_API_URL;
+const API_URL = import.meta.env.VITE_AUTH_API_URL;
 
 class ApiInstance {
   get = async <T>(

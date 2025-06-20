@@ -1,6 +1,6 @@
 import { Button, Form, Input, type FormProps } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { formValidationRules } from '@shared/lib';
+import { formValidationRules } from '@shared/index';
 import { useAuthSlice } from '@shared/model/auth/authSlice';
 import { selectErrorMsg, selectIsLoading, selectLoginAction } from '@shared/model/auth/selectors';
 import type { ILoginFormFieldType } from '../cfg/types';

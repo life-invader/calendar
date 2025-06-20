@@ -1,6 +1,6 @@
 import { create } from 'zustand'
-import type { IUser } from '@shared/lib/types';
 import type { IAuthSlice } from './types'
+import type { IUser } from '../types';
 
 export const useAuthSlice = create<IAuthSlice>((set) => ({
   isInitialAuthCheckingComplete: false,

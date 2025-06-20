@@ -1,5 +1,5 @@
 import { useEventSlice } from "../model";
-import type { IEvent } from "@shared/lib/types";
+import type { IEvent } from "@shared/index";
 import type { INewEvent } from "../model/types";
 
 /**

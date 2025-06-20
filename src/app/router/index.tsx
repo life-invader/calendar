@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router';
-import { PrivateRoute } from '@shared/lib/privateRoute/PrivateRoute';
 import { Main } from '@pages/main/ui/Main';
 import { Login } from '@pages/login/ui/Login';
-import { AppRoutePath } from '@shared/lib';
+import { AppRoutePath } from '@shared/index';
+import { PrivateRoute } from '../components/privateRoute/PrivateRoute';
 
 export const Router = () => {
   return (

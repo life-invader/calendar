@@ -1,5 +1,5 @@
 import type dayjs from "dayjs";
-import type { IEvent } from "@shared/lib/types";
+import type { IEvent } from "@shared/index";
 
 export interface IEventSlice {
   events: IEvent[];

@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import { Badge } from 'antd';
 import type { BadgeProps } from 'antd';
-import type { IEvent } from '@shared/lib/types';
+import type { IEvent } from '@shared/index';
 
 const getListData = (value: dayjs.Dayjs, events: IEvent[]) => {
   const filteredEvents = events.filter((event) => event.date === value.format('YYYY-MM-DD'));

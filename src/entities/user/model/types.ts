@@ -1,4 +1,4 @@
-import type { IUser } from "@shared/lib/types";
+import type { IUser } from "@shared/index";
 
 export interface IUserSlice {
   users: IUser[];

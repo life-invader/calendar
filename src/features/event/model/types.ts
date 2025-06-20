@@ -1,5 +1,5 @@
 import type dayjs from "dayjs";
-import type { IUser } from "@shared/lib/types";
+import type { IUser } from "@shared/index";
 import type { FormInstance } from "antd";
 
 export interface IEventFormFieldType {
