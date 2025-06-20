@@ -1,5 +1,5 @@
-import { LoginForm } from '@entities/forms';
 import { Navigate } from 'react-router';
+import { LoginForm } from '@features/auth';
 import { useAuthSlice } from '@shared/model/auth/authSlice';
 import { selectIsAuthenticated } from '@shared/model/auth/selectors';
 import { AppRoutePath } from '@shared/index';

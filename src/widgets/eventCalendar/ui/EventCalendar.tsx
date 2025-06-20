@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import { Calendar, Button, Modal, Form } from 'antd';
 import { useEffect, useState } from 'react';
-import { CreateNewEvent } from '@features/event';
+import { CreateNewEventForm } from '@features/event';
 import { eventSelectors, eventActions, useEventSlice } from '@entities/event';
 import { useUserSlice, userSelectors, userActions } from '@entities/user';
 import { dateCellRender } from '../lib';
@@ -62,7 +62,7 @@ export const EventCalendar = () => {
             Отмена
           </Button>,
         ]}>
-        <CreateNewEvent
+        <CreateNewEventForm
           form={form}
           guests={guests}
           date={calendarDate}

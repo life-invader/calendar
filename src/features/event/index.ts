@@ -1,1 +1,1 @@
-export { CreateNewEvent } from "./ui/CreateNewEvent"
+export { CreateNewEventForm } from "./ui/CreateNewEventForm"

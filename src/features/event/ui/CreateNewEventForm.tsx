@@ -4,7 +4,7 @@ import { formValidationRules } from '@shared/index';
 import { formatUsersForSelect } from '../lib';
 import type { ICreateNewEventProps, IEventFormFieldType } from '../model/types';
 
-export const CreateNewEvent = ({
+export const CreateNewEventForm = ({
   guests,
   date,
   onFinish = () => {},

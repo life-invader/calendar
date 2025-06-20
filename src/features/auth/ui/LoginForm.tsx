@@ -3,7 +3,7 @@ import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { formValidationRules } from '@shared/index';
 import { useAuthSlice } from '@shared/model/auth/authSlice';
 import { selectErrorMsg, selectIsLoading, selectLoginAction } from '@shared/model/auth/selectors';
-import type { ILoginFormFieldType } from '../cfg/types';
+import type { ILoginFormFieldType } from '../model/types';
 
 export const LoginForm = () => {
   const isLoading = useAuthSlice(selectIsLoading);
